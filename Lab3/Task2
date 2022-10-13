@@ -1,0 +1,13 @@
+op(400, yfx, rodit).
+ivan rodit petr.
+marriy rodit petr.
+iliy rodit marriy.
+petr rodit nasty.
+
+
+
+?- X rodit Y, Y rodit Z, write(X), write(" parent "), write(Y), write(" parent "), write(Z), nl.
+
+
+
+

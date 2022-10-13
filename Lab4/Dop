@@ -1,0 +1,24 @@
+
+% memeber in List
+member(X,[X | _]):-write(X),nl.
+member(X,[_ | Tail]):- member(X,Tail).
+
+% addition list 
+addition(E,[],[E]).
+addition(E,[H|T],[H|T1]):-addition(E,T,T1).
+
+% deleted elements in List
+remove([], Y, Y).
+remove([X | Xs], Ys,Ans):-
+	not(member(X, Y)),
+	addition(X,Ys, Y),
+	Ans = Y.
+	remove(Xs, Y,Ans).
+
+% basic
+recurse([], List).
+recurse([H1 | T1], List):- recurse(T1, List).
+
+?-recurse([1, 2, 3, 4, 5, 6, 3, 4, 7],X),
+	remove(X,[],Answer),
+	write(Answer), nl.

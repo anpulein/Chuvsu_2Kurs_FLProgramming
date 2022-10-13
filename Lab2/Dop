@@ -1,0 +1,14 @@
+sorting([], []).
+sorting([H], [H]).
+sorting([H | Tail], Res):-
+	sorting(Tail, [H1 | Tail1]),
+	(H =< H1, Res = [H, H1 | Tail1];
+	H > H1, sorting([H1, H | Tail1], Res)).
+
+?-sorting([32, -3, 10, 3, 7], X), write(X).
+
+% 32, -3, 10, 3, 7, 9
+
+
+
+

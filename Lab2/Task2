@@ -1,0 +1,24 @@
+%-----------------Facts-----------------%
+translateNumber(0, '0').
+translateNumber(1, 'I').
+translateNumber(2, 'II').
+translateNumber(3, 'III').
+translateNumber(4, 'IV').
+translateNumber(5, 'V').
+translateNumber(6, 'VI').
+translateNumber(7, 'VII').
+translateNumber(8, 'VIII').
+translateNumber(9, 'IX').
+
+
+translate([], []).
+translate([Head | Tail], [Head_1 | Tail_1]):-
+	translateNumber(Head, Head_1),
+	translate(Tail, Tail_1).
+
+
+?-translate([1, 2, 7, 8, 9], X), write(X).
+
+
+
+

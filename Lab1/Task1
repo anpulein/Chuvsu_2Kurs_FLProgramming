@@ -1,0 +1,101 @@
+%------------------------------ Facts ------------------------------%
+%---Parents---%
+parent('Liza','Saha').
+parent('Liza','Olya').
+parent('Liza','Natasha').
+parent('Sasha','Anya').
+parent('Olay','Ilya').
+parent('Olya','Nikita').
+parent('Sergey', 'Ilya').
+parent('Sergey', 'Nikita').
+parent('Natasha','Dima').
+parent('Natasha','Vika').
+parent('Natasha','Milana').
+parent('Valentin','Dima').
+parent('Valentin','Vika').
+parent('Valentin','Milana').
+
+%---Mans---%
+man('Sasha').
+man('Sergey').
+man('Valentin').
+man('Nikita').
+man('Ilya').
+man('Dima').
+
+%---Womans---%
+woman('Liza').
+woman('Olya').
+woman('Natasha').
+woman('Anya').
+woman('Vika').
+woman('Milana').
+
+%---Marrieds---%
+married('Sergey','Olya').
+married('Valentin','Natasha').
+
+%---Husbandes---%
+husband('Sergey').
+husband('Valentin').
+
+%---Wifes---%
+wife('Olya').
+wife('Natasha').
+%------------------------------ Facts  ------------------------------%
+
+%------------------------------ Regulation ------------------------------%
+father(X,Y):-
+	man(X),
+	parent(X,Y).
+
+mother(X,Y):-
+	woman(X),
+	parent(X,Y).
+
+son(X,Y):-
+	man(X), father(Y,X);
+	man(X), mother(Y,X).
+
+daughter(X, Y):-
+	woman(X), father(Y,X);
+	woman(X), mother(Y,X).
+
+brother(X,Y):-
+	parent(Z,X),
+	parent(Z,Y),
+	man(X).
+
+sister(X,Y):-
+	parent(Z,X),
+	parent(Z,Y),
+	woman(X).
+
+double_brother(X,Y):-
+	man(X), parent(Z,X), parent(W,Y), brother(Z,W);
+	man(X), parent(Z,X), parent(W,Y), sister(Z,W).
+
+double_sister(X,Y):-
+	woman(X), parent(Z,X), parent(W,Y), sister(Z,W);
+	woman(X), parent(Z,X), parent(W,Y), brother(Z,W).
+
+grandfather(X,Y):-
+	man(X),
+	parent(Z,X),
+	parent(Z,Y).
+%------------------------------ Regulation ------------------------------%
+
+%------------------------------ Questions ------------------------------%
+?-father(X,'Anya'), write(X), nl. % Anya's father
+?-mother(X,'Anya'), write(X), nl. % Anya's father
+?-mother(X,'Dima'), write(X), nl. % Anya's father
+
+?-son(X,'Natasha'), write(X), nl.
+?-sister(X,'Natasha'), write(X).
+
+?-double_brother(X,Y), write(X), write(" "), write(Y), nl.
+?-2 = 2.
+%------------------------------ Questions ------------------------------%
+
+
+

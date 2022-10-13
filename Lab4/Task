@@ -1,0 +1,32 @@
+% sorting small -> big
+sorting([], []).
+sorting([H], [H]).
+sorting([H | Tail], Res):-
+	sorting(Tail, [H1 | Tail1]),
+	(H =< H1, Res = [H, H1 | Tail1];
+	H > H1, sorting([H1, H | Tail1], Res)).
+
+% memeber in List
+member(X,[X | _]):-write(X),nl.
+member(X,[_ | Tail]):- member(X,Tail).
+
+% append list 
+append([],Y, Y).
+append([H1 | T1], Lst, [H1 | T2]):- append(T1, Lst, T2).
+
+% deleted elements in List
+remove([], Y, Y).
+remove([X | Xs], Ys,Ans):-
+	not(member(X, Xs)),
+	append([X],Ys, Y),
+	remove(Xs, Y,Ans).
+remove([X | Xs], Ys, Ans):- remove(Xs,Ys,Ans).
+
+% basic
+recurse([], List, List).
+recurse([H1 | T1], List, [H2 | T2]):- recurse(T1, List, T2).
+
+?-recurse([2,3],[1,2,3,4],X),
+	remove(X,[],S),
+	sorting(S, Answer),
+	write(Answer),nl.

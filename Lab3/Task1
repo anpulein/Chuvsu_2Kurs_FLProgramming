@@ -1,0 +1,5 @@
+trapezium_area(A, B, H, Z):-
+	Z is (1 / 2) * H * (A + B).
+?-trapezium_area(3, 4, 2, Z), write("Answer = "), write(Z), nl.
+
+

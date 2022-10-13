@@ -1,0 +1,9 @@
+/*********Trapezoid area*********/
+sortingg([], []).
+sortingg([X,Y | Tail], [X,Y | Lst]):-
+	X =< Y, sortingg(Tail, Lst).
+
+
+?-sorting([32, -3, 10, 3, 7], L), write(L).
+
+
