@@ -1,0 +1,18 @@
+not(X) :- X, !, fail.
+not(X).
+
+room_1(X, Y):- 
+	X = princes;
+	Y = princes.  
+room_2(X, _):-
+	X = princes.
+
+mayb(princes, princes):- room_1(princes, princes), not(room_2(princes, princes)).
+mayb(princes, tiger):- room_1(princes, tiger), room_2(princes, tiger).
+mayb(tiger, tiger):- not(room_1(tiger, tiger)), room_2(tiger, tiger).
+mayb(tiger, princes):- not(room_1(tiger, princes)), not(room_2(tiger, princes)).
+
+
+?- mayb(X, Y),
+write("I room: "), write(X), nl,
+write("II room: "), write(Y), nl.

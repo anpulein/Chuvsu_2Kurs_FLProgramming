@@ -1,0 +1,25 @@
+
+is_normal(X):-
+	X = lgun;
+	X = normal.
+is_true(X, Y):-
+	X = normal;
+	Y = ricer.
+is_not_norm(Z):-
+	Z = ricer;
+	Z = normal.
+
+mayb(lgun, normal, ricer):-
+	is_normal(lgun), 
+	is_true(normal, ricer),
+	is_not_norm(ricer).
+mayb(lgun, ricer, normal):-
+	is_normal(lgun), 
+	is_true(ricer, normal),
+	is_not_norm(normal).
+
+
+?-mayb(X, Y, Z),
+write("i'm norm - "), write(X), nl,
+write("is true - "), write(Y), nl,
+write("is not norm - "), write(Z), nl.

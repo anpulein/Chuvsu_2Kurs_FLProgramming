@@ -1,0 +1,31 @@
+% Bubble Sorting %
+sorting([], []).
+sorting([H], [H]).
+sorting([H | Tail], Res):-
+	sorting(Tail, [H1 | Tail1]),
+	(H =< H1, Res = [H, H1 | Tail1];
+	H > H1, sorting([H1, H | Tail1], Res)).
+
+% Occurences of an element in an array %
+member(X,[X|_]):-write(X),nl.
+member(X,[_|Tail]):-
+member(X,Tail).
+
+% Denial % 
+not(X) :- X, !, fail.
+not(X).
+
+% Merging Lists %
+append([],Y,Y).
+append([H1|T1],Lst,[H1|T2]):-append(T1,Lst,T2).
+
+% Converting a list to a set %
+list_to_set([], List, List).
+list_to_set([Head | Tail], List, Set):-
+	not(member(Head, Tail)),
+	append(List, [Head], Res),
+	list_to_set(Tail, Res, Set).
+list_to_set([Head | Tail], List, Set):-
+	list_to_set(Tail, List, Set).
+
+?-list_to_set([1, 5, 3, 3, 2, 7, 7 ,9],[],Ans), sorting(Ans, Res), write(Res),nl.

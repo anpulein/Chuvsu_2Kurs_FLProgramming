@@ -1,0 +1,38 @@
+- Англичанин живет в красном доме
+- У Испанца есть собака
+- Кофе пьют в зеленом доме
+- Украинец пьет чай
+- Зеленый дом 1 по правую руку от цвета слоновой кости 
+- Курильщик Уинстона держит улиток 
+- Сигареты Кулл курят в желтом доме 
+- Молоко пьют в среднем доме
+- Норвежец живет в крайнем слева доме
+- Мужчина курищий честор Филл живет в доме с соседнем домом мужчины у которого есть Лиса
+- Сигареты Кулл курят в доме с соседенем домом где имеется лошадь 
+- Мужчина предпочитающий Лаки Страйк пьет апельсиновый сок
+- Япониц курит сигареты Парламент 
+- Норвежец живет в доме рядом с голубым домом 
+
+Вопросы:
+- У кого есть зебра? 
+- Кто пьет воду? 
+
+
+
+first(house(_, norway, _, _, _), Houses), %-- hint 1
+    member(house(red, england, _, _, _), Houses), %-- hint 2
+    left(house(green, _, _, _, _), house(white, _, _, _, _), Houses), %-- hint 3 - on_the_left
+    member(house(_, denmark, _, tea, _), Houses), %-- hint 4
+    next(house(_, _, _, _, light), house( _, _, cat, _, _), Houses), %-- hint 5 - next_to
+    member(house(yellow, _, _, _, cigar), Houses), %-- hint 6
+    member(house(_, germany, _, _, waterpipe), Houses), %-- hint 7
+    middle(house(_, _, _, milk, _), Houses), %-- hint 8
+    next(house(_, _, _, _, light), house(_, _, _, water, _), Houses), %-- hint 9 - next_to
+    member(house(_, _, bird, _, nofilter), Houses), %-- hint 10
+    member(house(_, sweden, dog, _, _), Houses), %-- hint 11
+    next(house(_, norway, _, _, _), house(blue, _, _, _, _), Houses), %-- hint 12 - next_to
+    next(house(_, _, horse, _, _), house(yellow, _, _, _, _), Houses), %-- hint 13 - next_to
+    member(house(_, _, _, beer, menthol), Houses), %-- hint 14
+    member(house(green, _, _, coffee, _), Houses), %-- hint 15
+    member(house(_, Who, fish, _, _), Houses),
+    write(Houses), nl.

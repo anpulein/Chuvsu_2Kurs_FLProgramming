@@ -15,6 +15,7 @@ parent('Valentin','Dima').
 parent('Valentin','Vika').
 parent('Valentin','Milana').
 
+
 %---Mans---%
 man('Sasha').
 man('Sergey').
@@ -42,12 +43,6 @@ husband('Valentin').
 %---Wifes---%
 wife('Olya').
 wife('Natasha').
-%------------------------------ Facts  ------------------------------%
-
-%------------------------------ Regulation ------------------------------%
-father(X,Y):-
-	man(X),
-	parent(X,Y).
 
 mother(X,Y):-
 	woman(X),
@@ -86,15 +81,12 @@ grandfather(X,Y):-
 %------------------------------ Regulation ------------------------------%
 
 %------------------------------ Questions ------------------------------%
-?-father(X,'Anya'), write(X), nl. % Anya's father
-?-mother(X,'Anya'), write(X), nl. % Anya's father
-?-mother(X,'Dima'), write(X), nl. % Anya's father
-
-?-son(X,'Natasha'), write(X), nl.
-?-sister(X,'Natasha'), write(X).
-
-?-double_brother(X,Y), write(X), write(" "), write(Y), nl.
-?-2 = 2.
+?-assert_in(father(X, Y):-
+	man(X),
+	parent(X,Y)	
+).
+man('Vova') .
+father(_0,_1) .
 %------------------------------ Questions ------------------------------%
 
 

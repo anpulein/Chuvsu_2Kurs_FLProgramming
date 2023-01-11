@@ -1,0 +1,42 @@
+first(H,[H|_]).
+
+left(X,Y,[X,Y|_]).
+left(X,Y,[_|H]):- left(X,Y,H).
+
+next(X,Y,[X,Y|_]).
+next(X,Y,[Y,X|_]).
+next(X,Y,[_|H]):- next(X,Y,H).
+
+middle(X,[_,_,X,_,_]).
+
+member(Element, [Element | _]).
+member(Element, [_ | Tail]):- member(Element, Tail).
+
+add_facts(Houses):-
+    member(house(red, england, _, _, _), Houses), %-- temp 1
+    member(house(_, ispan, dog, _, _), Houses), %-- temp 2
+    member(house(green, _, _, coffee, _), Houses), %-- temp 3
+    member(house(_, ukrain, _, tea, _), Houses), %-- temp 4 
+    left(house(green, _, _, _, _), house(white, _, _, _, _), Houses), %-- temp 5
+    member(house(_, _, snail, _, winston), Houses), %-- temp 6
+    member(house(yellow, _, _, _, kull), Houses), %-- temp 7
+    middle(house(_, _, _, milk, _), Houses), %-- temp 8
+    first(house(_, norway, _, _, _), Houses), %-- temp 9
+    next(house(_, _, _, _, chestor), house( _, _, fox, _, _), Houses), %-- temp 10
+    next(house(_, _, _, _, kull), house(_, _, horse, _, _), Houses), %-- temp 11
+    member(house(_, _, _, juce, lucky), Houses), %-- temp 12
+    member(house(_, japan, _, _, parlament), Houses), %-- temp 13
+    next(house(_, norway, _, _, _), house(blue, _, _, _, _), Houses). %-- temp 14
+
+answer(Who_animal, Who_drink):-
+    Houses = [_, _, _, _, _],
+    add_facts(Houses),
+
+    member(house(_, Who_animal, zebra, _, _), Houses), %-- temp question 1
+    member(house(_, Who_drink, _, water, _), Houses), %-- temp question 2
+
+    write(Houses), nl.
+
+?-answer(Name_1, Name_2), 
+    write("Zebra = "), write(Name_1), nl, 
+    write("Water = "), write(Name_2), nl.

@@ -1,0 +1,72 @@
+	%------------------- Facts -------------------%
+student_group_report_card("Galkin Dmitry Sergeevich", "IVT-41-20", 4.6).
+student_group_report_card("Ivanova Yulia Evgeneevna", "IVT-22-19", 5.0).
+student_group_report_card("Ivanov Ivan Ivanovich", "IVT-41-20", 3.2).
+
+	%------------------- Rules -------------------%
+
+% Show of all students
+show_list_students():-
+	write("List students: "), nl,
+	student_group_report_card(St_name, St_group, St_score),
+	write("    "), write(St_name), write(" "),
+	write(St_group), write(" "),
+	write(St_score), nl.
+
+% Show of Group students
+show_list_students(Group):-
+	write("List students if her group = "), write(Group), nl,
+	student_group_report_card(St_name, St_group, St_score),
+	Group = St_group,
+	write("    "), write(St_name), write(" "),
+	write(St_group), write(" "),
+	write(St_score), nl.
+
+% Add student in group
+add_student_in_group(St_name, St_group, St_score):-
+	assert_in(student_group_report_card(St_name, St_group, St_score)),
+	write("Add student in list students = "), 
+	write(St_name), write(", "),
+	write(St_group), write(", "),
+	write(St_score), nl.
+
+% Del student from group
+del_student_from_group(St_name, St_group, St_score):-
+	retract_in(student_group_report_card(St_name, St_group, St_score)),
+	(St_score < 2.7, write("Del student from list students because average < 2.7 = "),
+		write(St_name), write(", "),
+		write(St_group), write(", "),
+		write(St_score), nl
+	);
+	(St_score >= 2.7, write("Del student from list students = "),
+		write(St_name), write(", "),
+		write(St_group), write(", "),
+		write(St_score), nl).
+
+% Task menu
+menu(Number):-
+	Number = 1, show_list_students();
+	Number = 2, show_list_students("IVT-41-20");
+	Number = 3, add_student_in_group("Stepanov Stepan Stepanovich", "IVT-22-22", 4.1);
+	Number = 4, del_student_from_group("Stepanov Stepan Stepanovich", "IVT-22-22", 4.1).
+
+	%------------------- Questions -------------------%
+
+% 1- Show of all students %
+?-menu(1), nl.
+
+% 2 - Show of Group students %
+?-menu(2), nl.
+
+% 3 - Add student in group %
+?-menu(3), nl.
+
+% 1- Show of all students %
+?-menu(1), nl.
+
+% 4 - Del student from group %
+?-menu(4), nl.
+
+% 1- Show of all students %
+?-menu(1), nl.
+
